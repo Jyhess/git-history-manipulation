@@ -7,7 +7,7 @@ name = "git-history-manipulation"
 version = "0.1.0"
 description = "A repository to learn Git history manipulation"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 authors = [
     {name = "Jyhess"}
 ]
