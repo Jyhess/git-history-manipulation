@@ -208,6 +208,9 @@ Les commits A, B, C sont "rejoués" sur G, créant de nouveaux commits A', B', C
 - ✅ Facilite la lecture de l'historique
 - ✅ Pas de commits de merge superflus
 - ✅ Idéal avant de merger une feature dans main
+- ✅ Plus facile de gérer les conflits sur les branches longues (résolution commit par commit, avec possibilité de recompiler et réexécuter les tests à chaque étape)
+- ✅ Permet de déplacer son travail d'une branche à l'autre (ex: commencé sur main, puis déplacé sur la branche de maintenance)
+- ✅ Possibilité de réorganiser l'historique (rebase interactif, voir plus loin)
 
 **Inconvénients du rebase :**
 - ❌ Réécrit l'historique (attention aux branches partagées !)
@@ -244,7 +247,7 @@ $ git merge main
     A---B---M  feature
    /       /
   C---D---E---F  main
-          (M = merge commit)
+              (M = merge commit)
 ```
 
 #### Option 2 : Rebase
@@ -256,8 +259,8 @@ $ git rebase main
 
 **Résultat :**
 ```
-              A'--B'  feature
-             /
+                  A'--B'  feature
+                 /
   C---D---E---F  main
 ```
 
@@ -276,6 +279,12 @@ $ git rebase main
 > ⚠️ **Ne jamais rebaser des commits qui ont été pushés sur une branche publique/partagée !**
 
 Si vous rebasez une branche partagée, vous créez des conflits pour tous les autres développeurs qui ont basé leur travail dessus.
+
+### ⚠️ Point d'attention sur la direction
+
+Une nuance importante à retenir :
+- On **merge DANS** une branche : `git merge feature` (merge feature **dans** la branche courante)
+- On **rebase SUR** une branche : `git rebase main` (rebase la branche courante **sur** main)
 
 ---
 
@@ -325,6 +334,8 @@ pick ghi9012 Troisième commit
 # d, drop = supprimer le commit
 ```
 
+Vous pouvez alors changer le verbe de chaque début de ligne pour dire ce que vous voulez faire avec ce commit.
+
 ### Exemples concrets
 
 #### Exemple 1 : Modifier un message de commit
@@ -368,7 +379,7 @@ ghi9012 Initial commit
 
 ```bash
 $ git log --oneline
-abc1234 Ajout des tests
+abc1234 Utilisation de la fonction de calcul
 def5678 Ajout de la fonction de calcul  # ← bug ici !
 ghi9012 Création de la structure
 ```
@@ -381,7 +392,7 @@ $ git rebase -i HEAD~3
 # 2. Marquer le commit à modifier avec "edit" (ou "e")
 pick ghi9012 Création de la structure
 edit def5678 Ajout de la fonction de calcul  # ← changer "pick" en "edit"
-pick abc1234 Ajout des tests
+pick abc1234 Utilisation de la fonction de calcul
 
 # 3. Sauvegarder et fermer
 # Git s'arrête sur le commit def5678
@@ -409,7 +420,7 @@ $ git rebase -i HEAD~4
 pick ghi9012 Création de la structure
 pick def5678 Ajout de la fonction de calcul
 fixup jkl3456 fix: correction bug calcul  # ← fusionné avec le commit précédent
-pick abc1234 Ajout des tests
+pick abc1234 Utilisation de la fonction de calcul
 ```
 
 #### Exemple 3 : Réorganiser les commits pour un ordre plus logique
@@ -521,8 +532,7 @@ pick def5678 refactor: amélioration de la lisibilité
 ```bash
 $ git log --oneline
 xyz1234 refactor: amélioration de la lisibilité
-wxy9876 feat: implémentation de la validation du mot de passe
-vut5432 test: ajout test de validation du mot de passe
+wxy9876 feat: implémentation et test de la validation du mot de passe
 rst2109 refactor: préparation de la structure pour l'authentification
 ```
 
@@ -544,22 +554,11 @@ rst2109 refactor: préparation de la structure pour l'authentification
    - Bisect plus efficace pour trouver les bugs
    - Documentation naturelle du processus de développement
 
-#### Commandes utiles pendant le rebase interactif
+#### Astuce pour les gros rebases
 
-```bash
-# Annuler tout et recommencer
-$ git rebase --abort
-
-# Si vous êtes bloqué dans un conflit
-$ git rebase --skip  # Ignorer le commit actuel
-
-# Après avoir résolu un conflit
-$ git add .
-$ git rebase --continue
-
-# Pour modifier le dernier commit (sans rebase)
-$ git commit --amend
-```
+Quand il y a beaucoup de commits à modifier, ne pas hésiter à faire le rebase en plusieurs étapes.
+Par exemple, en réorganisant les commits feature après feature, plutôt que de tout faire d'un coup.
+Cela réduit les risques d'erreur et facilite la gestion des conflits.
 
 ---
 
@@ -970,6 +969,81 @@ Le reflog est comme un historique de vos historiques. Tant que vous n'avez pas v
 - ❌ Changements non commités (dans working directory)
 - ❌ Fichiers non trackés supprimés
 - ❌ Historique vieux de plus de 90 jours (par défaut)
+
+---
+
+## 6. Configuration Git utile
+
+### Configurer Git pour rebaser par défaut lors d'un pull
+
+Par défaut, `git pull` effectue un merge. Vous pouvez configurer Git pour qu'il effectue un rebase automatiquement à la place.
+
+**Configuration globale (pour tous vos projets) :**
+```bash
+$ git config --global pull.rebase true
+```
+
+**Configuration locale (pour le projet actuel uniquement) :**
+```bash
+$ git config pull.rebase true
+```
+
+**Vérifier la configuration :**
+```bash
+$ git config --get pull.rebase
+true
+```
+
+**Comportement :**
+
+Avant la configuration :
+```bash
+$ git pull origin main
+# Effectue : git fetch + git merge origin/main
+# Crée un commit de merge
+```
+
+Après la configuration :
+```bash
+$ git pull origin main
+# Effectue : git fetch + git rebase origin/main
+# Rebase vos commits locaux sur la version distante
+```
+
+**Avantages :**
+- ✅ Historique linéaire automatique
+- ✅ Pas de commits de merge lors des synchronisations
+- ✅ Plus propre pour les branches de feature
+
+**Options supplémentaires :**
+
+```bash
+# Rebaser uniquement si le fast-forward n'est pas possible
+$ git config pull.rebase merges
+
+# Rebaser en préservant les merges locaux
+$ git config pull.rebase preserve
+
+# Revenir au comportement par défaut (merge)
+$ git config pull.rebase false
+```
+
+### Autres configurations utiles
+
+```bash
+# Définir l'éditeur par défaut pour les rebases interactifs
+$ git config --global core.editor "nano"  # ou "vim", "code --wait", etc.
+
+# Activer la coloration syntaxique
+$ git config --global color.ui auto
+
+# Définir un alias pour le rebase interactif
+$ git config --global alias.rbi "rebase -i"
+# Utilisation : git rbi HEAD~3
+
+# Activer l'autostash automatiquement lors des rebases
+$ git config --global rebase.autoStash true
+```
 
 ---
 
