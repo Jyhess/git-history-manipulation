@@ -11,8 +11,8 @@ Ce repository est conçu pour aider les équipes de développement à maîtriser
 3. [Le Rebase Interactif](#3-le-rebase-interactif)
 4. [Les cas particuliers du Rebase](#4-les-cas-particuliers-du-rebase)
 5. [Le Reflog](#5-le-reflog)
-6. [Configuration Git utile](6-Configuration-Git-utile)
-7. [Conclusion](Conclusion)
+6. [Configuration Git utile](6-configuration-git-utile)
+7. [Conclusion](-conclusion)
 
 ---
 
