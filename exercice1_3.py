@@ -49,7 +49,7 @@ def main():
     with open("exercices/exercice1_3/feature.py", "w") as f:
         f.write("# Feature implementation\n")
         f.write("def calculate():\n")
-        f.write("    return 42\n")  # typo volontaire
+        f.write("    return 42  # TODO: fix this\n")
     run("git add exercices/exercice1_3/feature.py")
     run("git commit -m 'Add feature'")
     
