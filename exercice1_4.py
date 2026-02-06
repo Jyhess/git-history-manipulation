@@ -50,11 +50,11 @@ def main():
     run("git commit -m 'Initial commit'")
     
     # Commit 2: Add temp file (TO BE DELETED)
-    with open("exercices/exercice1_4/temp_debug.log", "w") as f:
+    with open("exercices/exercice1_4/temp_debug.txt", "w") as f:
         f.write("DEBUG: This file was added by mistake\n")
         f.write("DEBUG: Should not be in version control\n")
         f.write("DEBUG: Contains temporary debugging info\n")
-    run("git add exercices/exercice1_4/temp_debug.log")
+    run("git add exercices/exercice1_4/temp_debug.txt")
     run("git commit -m 'WIP: Add temporary debug file'")
     
     # Commit 3: Add core functionality
