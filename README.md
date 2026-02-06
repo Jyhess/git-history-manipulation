@@ -2,6 +2,30 @@
 
 Ce repository est conçu pour aider les équipes de développement à maîtriser la manipulation de l'historique Git. Ce guide contient des explications détaillées, des schémas et des exemples pratiques.
 
+## 🎯 Exercices pratiques
+
+**Nouveau !** Ce repository contient maintenant un système d'exercices complet pour pratiquer la manipulation d'historique Git.
+
+📖 **Consultez le fichier [`exercices.md`](exercices.md)** pour accéder à tous les exercices.
+
+### Comment utiliser les exercices ?
+
+1. Chaque exercice dispose d'un script Python d'initialisation (`exercice1_1.py`, `exercice1_2.py`, etc.)
+2. Lancez le script pour créer l'environnement Git de l'exercice
+3. Suivez les instructions dans `exercices.md` pour pratiquer
+4. Les scripts sont idempotents : vous pouvez les relancer autant de fois que nécessaire
+
+**Exemple :**
+```bash
+python exercice1_1.py
+# Suivez ensuite les instructions dans exercices.md
+```
+
+### Structure des exercices
+
+- **Série 1** : 6 exercices élémentaires (rebase, reword, squash, delete, reorder, reflog)
+- **Série 2** : 4 challenges progressifs (debug, cleanup, fix extraction, history rewrite)
+
 ---
 
 ## 📚 Table des matières
