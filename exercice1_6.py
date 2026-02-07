@@ -84,19 +84,40 @@ def main():
     print("="*60)
     print("\nOops! The branch exercice1_6 was accidentally deleted!")
     print(f"Last commit was: {last_commit[:8]}")
-    print("\nYour task:")
-    print("  Recover the deleted branch using reflog")
-    print("\nCommands to use:")
-    print("  git reflog")
-    print("  git checkout -b exercice1_6 <commit-hash>")
-    print("  or")
-    print("  git branch exercice1_6 <commit-hash>")
-    print("\nHint: Look for 'Important feature completed' in the reflog")
-    print("="*60)
     
-    # Return to original branch
-    if current_branch and current_branch != "exercice1_6":
-        run(f"git checkout {current_branch}", check=False)
+    print("\n" + "="*60)
+    print("EXERCICE 1.6 : RÉCUPÉRER UNE BRANCHE PERDUE (REFLOG)")
+    print("="*60)
+    print("\n📋 OBJECTIF:")
+    print("   Récupérez la branche 'exercice1_6' qui a été supprimée")
+    print("   en utilisant le reflog")
+    
+    print("\n📝 CONTEXTE:")
+    print("   La branche 'exercice1_6' contenait 3 commits importants.")
+    print("   Elle vient d'être supprimée par erreur avec 'git branch -D'.")
+    print("   Le reflog garde une trace de toutes les opérations Git.")
+    
+    print("\n💡 COMMANDES À EXÉCUTER:")
+    print("   git reflog                  # Voir l'historique des opérations")
+    print("   # Cherchez 'Important feature completed' dans le reflog")
+    print(f"   git checkout -b exercice1_6 {last_commit[:8]}")
+    print("   # OU utilisez le HEAD@{{N}} trouvé dans le reflog:")
+    print("   # git checkout -b exercice1_6 HEAD@{N}")
+    print("   git log --oneline           # Vérifier que la branche est récupérée")
+    
+    print("\n✅ RÉSULTAT ATTENDU (3 commits):")
+    print("   * commit Important feature completed")
+    print("   * commit Work in progress")
+    print("   * commit Start new feature")
+    
+    print("\n💡 ASTUCE:")
+    print("   Le reflog conserve l'historique pendant 90 jours par défaut.")
+    print("   Même après un 'git branch -D', les commits restent accessibles !")
+    
+    print("\n" + "="*60)
+    print("Vous êtes actuellement sur la branche 'main'")
+    print("Récupérez la branche 'exercice1_6' puis basculez dessus !")
+    print("="*60 + "\n")
 
 if __name__ == "__main__":
     main()

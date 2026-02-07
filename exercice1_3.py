@@ -90,22 +90,41 @@ def main():
     print("="*60)
     print("\nBranch created:")
     print("  - exercice1_3 (with 6 commits)")
-    print("\nYour task:")
-    print("  Squash 'fix:' commits with their corresponding previous commits")
-    print("  Final result should have 4 commits:")
-    print("  - Initial setup")
-    print("  - Add feature (including fix)")
-    print("  - Add tests (including fix)")
-    print("  - Add documentation")
-    print("\nCommands to use:")
-    print("  git checkout exercice1_3")
-    print("  git rebase -i HEAD~6")
-    print("  (Use 'squash' or 'fixup' for fix commits)")
-    print("="*60)
     
-    # Return to original branch
-    if current_branch:
-        run(f"git checkout {current_branch}", check=False)
+    print("\n" + "="*60)
+    print("EXERCICE 1.3 : SQUASH DE COMMITS")
+    print("="*60)
+    print("\n📋 OBJECTIF:")
+    print("   Fusionnez les commits 'fix:' avec leurs commits précédents")
+    print("   correspondants pour obtenir un historique propre")
+    
+    print("\n📝 CONTEXTE:")
+    print("   L'historique contient des commits de 'fix' qui devraient")
+    print("   être fusionnés avec les commits qu'ils corrigent.")
+    print("   - 'fix: feature typo' doit être fusionné avec 'Add feature'")
+    print("   - 'fix: tests syntax' doit être fusionné avec 'Add tests'")
+    
+    print("\n💡 COMMANDES À EXÉCUTER:")
+    print("   git log --oneline           # Voir les 6 commits")
+    print("   git rebase -i HEAD~6        # Rebase interactif")
+    print("   # Déplacez les lignes 'fix:' juste après leur commit parent")
+    print("   # Remplacez 'pick' par 'fixup' (ou 'f') pour les commits fix:")
+    print("   # Sauvegardez et fermez l'éditeur")
+    print("   git log --oneline           # Vérifier le résultat (4 commits)")
+    
+    print("\n✅ RÉSULTAT ATTENDU (4 commits):")
+    print("   * commit Add documentation")
+    print("   * commit Add tests (incluant fix: tests syntax)")
+    print("   * commit Add feature (incluant fix: feature typo)")
+    print("   * commit Initial setup")
+    
+    print("\n" + "="*60)
+    print("Vous êtes maintenant sur la branche 'exercice1_3'")
+    print("Vous pouvez commencer l'exercice !")
+    print("="*60 + "\n")
+    
+    # Switch to exercise branch (already on it, but make it explicit)
+    run("git checkout exercice1_3")
 
 if __name__ == "__main__":
     main()

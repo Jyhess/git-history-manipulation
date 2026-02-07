@@ -117,23 +117,52 @@ def main():
     print("="*60)
     print("\nBranch created:")
     print("  - exercice2_4 (with 14 chaotic commits)")
-    print("\nYour task:")
-    print("  Clean up this mess into 4 clear commits:")
-    print("  1. Setup: Initial project configuration")
-    print("  2. Core feature: Implement complete feature")
-    print("  3. Testing: Add comprehensive test suite")
-    print("  4. Documentation: Add complete project documentation")
-    print("\nCommands to use:")
-    print("  git checkout exercice2_4")
-    print("  git log --oneline  # See the chaos!")
-    print("  git rebase -i HEAD~14")
-    print("  (Reorder, squash, and reword to get 4 clean commits)")
-    print("\nTip: Group related commits together and give them clear messages")
-    print("="*60)
     
-    # Return to original branch
-    if current_branch:
-        run(f"git checkout {current_branch}", check=False)
+    print("\n" + "="*60)
+    print("EXERCICE 2.4 : RÉÉCRITURE COMPLÈTE D'UN HISTORIQUE SALE")
+    print("="*60)
+    print("\n📋 OBJECTIF:")
+    print("   Transformez 14 commits chaotiques en 4 commits propres et structurés")
+    
+    print("\n📝 CONTEXTE:")
+    print("   L'historique est un vrai chaos: messages peu clairs (wip, fix, etc.),")
+    print("   commits mal ordonnés, pas de structure. Vous devez le nettoyer")
+    print("   complètement et créer un historique professionnel.")
+    
+    print("\n💡 THÈMES À REGROUPER:")
+    print("   1. Setup (commits 1-4): Configuration initiale")
+    print("   2. Core Feature (commits 5-9): Fonctionnalité principale")
+    print("   3. Testing (commits 10-11): Tests")
+    print("   4. Documentation (commits 12-14): Documentation")
+    
+    print("\n💡 COMMANDES À EXÉCUTER:")
+    print("   git log --oneline           # Observer le chaos!")
+    print("   git rebase -i HEAD~14       # Rebase interactif")
+    print("   # Dans l'éditeur:")
+    print("   # 1. Réorganisez les commits par thème")
+    print("   # 2. Gardez le premier de chaque groupe avec 'pick'")
+    print("   # 3. Utilisez 'squash' pour les autres du même groupe")
+    print("   # 4. Utilisez 'reword' pour donner des messages clairs")
+    print("   git log --oneline           # Admirer le résultat (4 commits)")
+    
+    print("\n✅ RÉSULTAT ATTENDU (4 commits):")
+    print("   * commit Documentation: Add complete project documentation")
+    print("   * commit Testing: Add comprehensive test suite")
+    print("   * commit Core feature: Implement complete feature")
+    print("   * commit Setup: Initial project configuration")
+    
+    print("\n💡 CONSEIL:")
+    print("   C'est un exercice difficile! Prenez votre temps pour analyser")
+    print("   chaque commit et déterminer à quel thème il appartient.")
+    print("   N'hésitez pas à utiliser 'git rebase --abort' si vous vous perdez.")
+    
+    print("\n" + "="*60)
+    print("Vous êtes maintenant sur la branche 'exercice2_4'")
+    print("Vous pouvez commencer l'exercice !")
+    print("="*60 + "\n")
+    
+    # Switch to exercise branch (already on it, but make it explicit)
+    run("git checkout exercice2_4")
 
 if __name__ == "__main__":
     main()

@@ -64,18 +64,41 @@ def main():
     print("="*60)
     print("\nBranch created:")
     print("  - exercice1_2 (with 3 commits)")
-    print("\nYour task:")
-    print("  Fix the typo in the 2nd commit message:")
-    print("  'Add secnd file' → 'Add second file'")
-    print("\nCommands to use:")
-    print("  git checkout exercice1_2")
-    print("  git rebase -i HEAD~3")
-    print("  (Mark the 2nd commit with 'reword')")
-    print("="*60)
     
-    # Return to original branch
-    if current_branch:
-        run(f"git checkout {current_branch}", check=False)
+    print("\n" + "="*60)
+    print("EXERCICE 1.2 : REWORD D'UN ANCIEN COMMIT")
+    print("="*60)
+    print("\n📋 OBJECTIF:")
+    print("   Corrigez la faute d'orthographe dans le message du 2ème commit")
+    print("   'Add secnd file' → 'Add second file'")
+    
+    print("\n📝 CONTEXTE:")
+    print("   Un commit contient une faute d'orthographe dans son message.")
+    print("   Vous devez corriger ce message sans modifier le contenu du commit.")
+    
+    print("\n💡 COMMANDES À EXÉCUTER:")
+    print("   git log --oneline           # Voir les 3 commits")
+    print("   git rebase -i HEAD~3        # Rebase interactif")
+    print("   # Dans l'éditeur, remplacez 'pick' par 'reword' pour le 2ème commit")
+    print("   # Sauvegardez et fermez l'éditeur")
+    print("   # Corrigez le message dans le nouvel éditeur qui s'ouvre")
+    print("   git log --oneline           # Vérifier la correction")
+    
+    print("\n✅ RÉSULTAT ATTENDU:")
+    print("   * commit Add third file")
+    print("   * commit Add second file  ← Message corrigé")
+    print("   * commit Initial commit")
+    
+    print("\n❓ QUESTION BONUS:")
+    print("   Voyez-vous une 2ème façon d'obtenir le même résultat ?")
+    
+    print("\n" + "="*60)
+    print("Vous êtes maintenant sur la branche 'exercice1_2'")
+    print("Vous pouvez commencer l'exercice !")
+    print("="*60 + "\n")
+    
+    # Switch to exercise branch (already on it, but make it explicit)
+    run("git checkout exercice1_2")
 
 if __name__ == "__main__":
     main()

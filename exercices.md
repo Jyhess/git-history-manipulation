@@ -3,6 +3,43 @@
 Ce document contient une série d'exercices pratiques pour maîtriser la manipulation d'historique Git.
 Chaque exercice est accompagné d'un script Python qui initialise l'environnement nécessaire.
 
+## Commandes Git de base nécessaires
+
+Avant de commencer les exercices, assurez-vous de maîtriser ces commandes de base :
+
+### Navigation et inspection
+
+- `git branch` : Lister toutes les branches locales
+- `git branch -a` : Lister toutes les branches (locales et distantes)
+- `git checkout <branche>` : Changer de branche
+- `git checkout -b <nouvelle-branche>` : Créer et changer vers une nouvelle branche
+- `git log` : Afficher l'historique des commits
+- `git log --oneline` : Afficher l'historique en format compact
+- `git log --oneline --graph --all` : Visualiser l'historique avec un graphe
+- `git show <commit>` : Afficher les détails d'un commit spécifique
+- `git diff` : Voir les modifications non commitées
+- `git status` : Voir l'état du répertoire de travail
+
+### Manipulation d'historique
+
+- `git rebase <branche>` : Rebaser la branche courante sur une autre branche
+- `git rebase -i HEAD~N` : Rebase interactif sur les N derniers commits
+- `git rebase --continue` : Continuer un rebase après avoir résolu un conflit
+- `git rebase --abort` : Annuler un rebase en cours
+- `git commit --amend` : Modifier le dernier commit
+- `git reset HEAD~N` : Revenir N commits en arrière (en gardant les modifications)
+- `git reset --hard HEAD~N` : Revenir N commits en arrière (en perdant les modifications)
+- `git reflog` : Voir l'historique de toutes les opérations Git
+- `git cherry-pick <commit>` : Appliquer un commit spécifique
+
+### Commandes utiles pour les exercices
+
+- `git branch -D <branche>` : Supprimer une branche de force
+- `git log --oneline -N` : Afficher les N derniers commits en format compact
+- `git log --all --oneline --graph --decorate` : Vue complète de l'historique
+
+---
+
 ## Série 1 — Exercices élémentaires (6 exercices)
 
 ### Exercice 1 : Rebase de branche
