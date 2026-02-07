@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+"""
+Exercice 1.5: Réorganisation des commits
+Ce script crée une branche avec des commits dans le mauvais ordre.
+"""
+
+import os
+import subprocess
+import sys
+
+def run(cmd, check=True):
+    """Execute a shell command"""
+    print(f"Running: {cmd}")
+    result = subprocess.run(cmd, shell=True, check=check, capture_output=True, text=True)
+    if result.stdout:
+        print(result.stdout)
+    if result.stderr and result.returncode != 0:
+        print(result.stderr, file=sys.stderr)
+    return result
+
+def main():
+    # Save current branch
+    current_branch = run("git branch --show-current").stdout.strip()
+    
+    # Switch to main branch as base
+    run("git checkout main", check=False)
+    if run("git rev-parse --verify main", check=False).returncode != 0:
+        print("Warning: 'main' branch doesn't exist, using current branch")
+        run("git checkout -b main", check=False)
+    
+    # Clean up existing branch if it exists
+    run("git branch -D exercice1_5", check=False)
+    
+    # Create exercice1_5 branch
+    print("\n=== Creating exercice1_5 branch ===")
+    run("git checkout -b exercice1_5")
+    
+    # Create exercise directory
+    os.makedirs("exercices/exercice1_5", exist_ok=True)
+    
+    # Commit 1: Initial setup
+    with open("exercices/exercice1_5/config.yaml", "w") as f:
+        f.write("# Project configuration\n")
+        f.write("project: myapp\n")
+        f.write("version: 1.0\n")
+    run("git add exercices/exercice1_5")
+    run("git commit -m 'Initial setup'")
+    
+    # Commit 2: Add documentation (MAUVAIS ORDRE)
+    with open("exercices/exercice1_5/README.md", "w") as f:
+        f.write("# Documentation\n")
+        f.write("\n")
+        f.write("## Usage\n")
+        f.write("Run the main feature to process data.\n")
+    run("git add exercices/exercice1_5/README.md")
+    run("git commit -m 'Add documentation'")
+    
+    # Commit 3: Add main feature (MAUVAIS ORDRE)
+    with open("exercices/exercice1_5/feature.py", "w") as f:
+        f.write("# Main feature\n")
+        f.write("def process():\n")
+        f.write("    return 'Processed'\n")
+    run("git add exercices/exercice1_5/feature.py")
+    run("git commit -m 'Add main feature'")
+    
+    # Commit 4: Add tests (MAUVAIS ORDRE)
+    with open("exercices/exercice1_5/test_feature.py", "w") as f:
+        f.write("# Tests\n")
+        f.write("def test_process():\n")
+        f.write("    assert process() == 'Processed'\n")
+    run("git add exercices/exercice1_5/test_feature.py")
+    run("git commit -m 'Add tests'")
+    
+    print("\n" + "="*60)
+    print("✓ Exercice 1.5 initialized successfully!")
+    print("="*60)
+    print("\nBranch created:")
+    print("  - exercice1_5 (with 4 commits in wrong order)")
+    
+    print("\n" + "="*60)
+    print("EXERCICE 1.5 : RÉORGANISATION DES COMMITS")
+    print("="*60)
+    print("\n📋 OBJECTIF:")
+    print("   Réordonnez les commits pour obtenir une séquence logique:")
+    print("   tests → feature → documentation")
+    
+    print("\n📝 CONTEXTE:")
+    print("   Les commits sont dans le désordre. L'ordre actuel est:")
+    print("   1. Initial setup")
+    print("   2. Add documentation")
+    print("   3. Add main feature")
+    print("   4. Add tests")
+    
+    print("\n💡 COMMANDES À EXÉCUTER:")
+    print("   git log --oneline           # Voir l'ordre actuel")
+    print("   git rebase -i HEAD~4        # Rebase interactif")
+    print("   # Réorganisez les lignes dans l'ordre souhaité:")
+    print("   #   pick ... Initial setup")
+    print("   #   pick ... Add tests")
+    print("   #   pick ... Add main feature")
+    print("   #   pick ... Add documentation")
+    print("   # Sauvegardez et fermez l'éditeur")
+    print("   git log --oneline           # Vérifier le nouvel ordre")
+    
+    print("\n✅ RÉSULTAT ATTENDU:")
+    print("   * commit Add documentation")
+    print("   * commit Add main feature")
+    print("   * commit Add tests")
+    print("   * commit Initial setup")
+    
+    print("\n" + "="*60)
+    print("Vous êtes maintenant sur la branche 'exercice1_5'")
+    print("Vous pouvez commencer l'exercice !")
+    print("="*60 + "\n")
+    
+    # Switch to exercise branch (already on it, but make it explicit)
+    run("git checkout exercice1_5")
+
+if __name__ == "__main__":
+    main()
