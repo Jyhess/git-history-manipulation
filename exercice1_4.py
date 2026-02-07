@@ -78,21 +78,38 @@ def main():
     print("="*60)
     print("\nBranch created:")
     print("  - exercice1_4 (with 4 commits)")
-    print("\nYour task:")
-    print("  Delete the 2nd commit (temp_debug.log was added by mistake)")
-    print("  Final result should have 3 commits:")
-    print("  - Initial commit")
-    print("  - Add core functionality")
-    print("  - Add final feature")
-    print("\nCommands to use:")
-    print("  git checkout exercice1_4")
-    print("  git rebase -i HEAD~4")
-    print("  (Mark the 2nd commit with 'drop' or delete the line)")
-    print("="*60)
     
-    # Return to original branch
-    if current_branch:
-        run(f"git checkout {current_branch}", check=False)
+    print("\n" + "="*60)
+    print("EXERCICE 1.4 : SUPPRESSION DE COMMIT")
+    print("="*60)
+    print("\n📋 OBJECTIF:")
+    print("   Supprimez le 2ème commit qui a été ajouté par erreur")
+    print("   (celui qui contient temp_debug.txt)")
+    
+    print("\n📝 CONTEXTE:")
+    print("   Un fichier temporaire a été commité par erreur.")
+    print("   Ce commit doit être complètement supprimé de l'historique.")
+    
+    print("\n💡 COMMANDES À EXÉCUTER:")
+    print("   git log --oneline           # Voir les 4 commits")
+    print("   git rebase -i HEAD~4        # Rebase interactif")
+    print("   # Supprimez la ligne du 2ème commit (WIP: Add temporary debug file)")
+    print("   # OU remplacez 'pick' par 'drop' (ou 'd')")
+    print("   # Sauvegardez et fermez l'éditeur")
+    print("   git log --oneline           # Vérifier le résultat (3 commits)")
+    
+    print("\n✅ RÉSULTAT ATTENDU (3 commits):")
+    print("   * commit Add final feature")
+    print("   * commit Add core functionality")
+    print("   * commit Initial commit")
+    
+    print("\n" + "="*60)
+    print("Vous êtes maintenant sur la branche 'exercice1_4'")
+    print("Vous pouvez commencer l'exercice !")
+    print("="*60 + "\n")
+    
+    # Switch to exercise branch (already on it, but make it explicit)
+    run("git checkout exercice1_4")
 
 if __name__ == "__main__":
     main()

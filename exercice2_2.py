@@ -96,21 +96,45 @@ def main():
     print("="*60)
     print("\nBranch created:")
     print("  - exercice2_2 (with 10 messy commits)")
-    print("\nYour task:")
-    print("  Clean up the history to get 3 clear commits:")
-    print("  1. Preparation: Initial setup and configuration")
-    print("  2. Feature: Implement user authentication")
-    print("  3. Refactor: Clean and optimize code")
-    print("\nCommands to use:")
-    print("  git checkout exercice2_2")
-    print("  git log --oneline")
-    print("  git rebase -i HEAD~10")
-    print("  (Squash related commits and reword messages)")
-    print("="*60)
     
-    # Return to original branch
-    if current_branch:
-        run(f"git checkout {current_branch}", check=False)
+    print("\n" + "="*60)
+    print("EXERCICE 2.2 : NETTOYAGE MASSIF (SQUASH + REWORD)")
+    print("="*60)
+    print("\n📋 OBJECTIF:")
+    print("   Regroupez 10 commits désorganisés en 3 commits thématiques propres")
+    
+    print("\n📝 CONTEXTE:")
+    print("   L'historique contient beaucoup de petits commits (wip, fix, etc.)")
+    print("   qui doivent être regroupés par thème:")
+    print("   - Commits 1-3: Configuration et setup")
+    print("   - Commits 4-7: Implémentation de l'authentification")
+    print("   - Commits 8-10: Refactoring et optimisation")
+    
+    print("\n💡 COMMANDES À EXÉCUTER:")
+    print("   git log --oneline           # Observer le désordre")
+    print("   git rebase -i HEAD~10       # Rebase interactif")
+    print("   # Regroupez et squashez les commits par thème:")
+    print("   # - Gardez le 1er commit de chaque groupe avec 'pick'")
+    print("   # - Utilisez 'squash' (ou 's') pour les autres du même groupe")
+    print("   # - Utilisez 'reword' (ou 'r') pour améliorer les messages")
+    print("   git log --oneline           # Vérifier (3 commits)")
+    
+    print("\n✅ RÉSULTAT ATTENDU (3 commits avec messages clairs):")
+    print("   * commit Refactor: Clean and optimize code")
+    print("   * commit Feature: Implement user authentication")
+    print("   * commit Preparation: Initial setup and configuration")
+    
+    print("\n💡 CONSEIL:")
+    print("   Dans l'éditeur de rebase, vous pouvez réorganiser les lignes")
+    print("   pour grouper les commits apparentés ensemble")
+    
+    print("\n" + "="*60)
+    print("Vous êtes maintenant sur la branche 'exercice2_2'")
+    print("Vous pouvez commencer l'exercice !")
+    print("="*60 + "\n")
+    
+    # Switch to exercise branch (already on it, but make it explicit)
+    run("git checkout exercice2_2")
 
 if __name__ == "__main__":
     main()

@@ -78,16 +78,37 @@ def main():
     print("\nBranches created:")
     print("  - exercice1_1_main (with 3 commits)")
     print("  - exercice1_1_feature (diverged, with 2 commits)")
-    print("\nYour task:")
-    print("  Rebase exercice1_1_feature onto exercice1_1_main")
-    print("\nCommands to use:")
-    print("  git checkout exercice1_1_feature")
-    print("  git rebase exercice1_1_main")
-    print("="*60)
     
-    # Return to original branch
-    if current_branch:
-        run(f"git checkout {current_branch}", check=False)
+    print("\n" + "="*60)
+    print("EXERCICE 1.1 : REBASE DE BRANCHE")
+    print("="*60)
+    print("\n📋 OBJECTIF:")
+    print("   Rebasez la branche 'exercice1_1_feature' sur le HEAD")
+    print("   de la branche 'exercice1_1_main'")
+    
+    print("\n📝 CONTEXTE:")
+    print("   Deux branches ont divergé depuis un point commun.")
+    print("   La branche 'exercice1_1_main' a avancé avec 2 nouveaux commits.")
+    print("   La branche 'exercice1_1_feature' a 1 commit de fonctionnalité.")
+    
+    print("\n💡 COMMANDES À EXÉCUTER:")
+    print("   git log --oneline --graph --all  # Visualiser l'état actuel")
+    print("   git rebase exercice1_1_main      # Rebaser sur main")
+    print("   git log --oneline --graph --all  # Vérifier le résultat")
+    
+    print("\n✅ RÉSULTAT ATTENDU:")
+    print("   * commit (exercice1_1_feature) Add feature implementation")
+    print("   * commit Fix bug in main")
+    print("   * commit Update configuration")
+    print("   * commit (exercice1_1_main) Initial setup")
+    
+    print("\n" + "="*60)
+    print("Vous êtes maintenant sur la branche 'exercice1_1_feature'")
+    print("Vous pouvez commencer l'exercice !")
+    print("="*60 + "\n")
+    
+    # Switch to exercise branch
+    run("git checkout exercice1_1_feature")
 
 if __name__ == "__main__":
     main()
