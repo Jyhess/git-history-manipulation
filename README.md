@@ -119,9 +119,9 @@ deactivate
 
 ---
 
-## 📚 Commencer le tutoriel
+## 📚 Guides disponibles
 
-Une fois votre environnement configuré, consultez le guide complet de manipulation Git :
+Une fois votre environnement configuré, consultez les guides suivants :
 
 👉 **[LESSON.md](LESSON.md)** - Guide complet sur la manipulation de l'historique Git
 
@@ -132,6 +132,13 @@ Le guide couvre :
 - Le reflog
 - Configurations Git utiles
 - Et bien plus encore !
+
+⚙️ **[TERMINAL-CONFIG.md](TERMINAL-CONFIG.md)** - Configuration du terminal et alias Git
+
+Ce guide vous aide à :
+- Afficher le nom de la branche dans votre terminal (posh-git, oh-my-zsh, starship, etc.)
+- Configurer des alias Git pratiques pour Windows, macOS et Linux
+- Améliorer votre productivité avec Git au quotidien
 
 ---
 
