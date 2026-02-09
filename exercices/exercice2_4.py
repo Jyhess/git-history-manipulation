@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Exercice 2.4: Réécriture complète d'un historique sale
-Ce script crée un historique très désorganisé avec beaucoup de commits à nettoyer.
+Exercice 2.4: Extraction d'un fix dans le mauvais commit
+Ce script crée une situation où un fix a été inclus dans le mauvais commit.
 """
 
 import os
@@ -38,113 +38,98 @@ def main():
     # Create exercise directory
     os.makedirs("exercices/exercice2_4", exist_ok=True)
     
-    # Chaotic commits - Theme 1: Setup (should be combined)
-    with open("exercices/exercice2_4/config.ini", "w") as f:
-        f.write("[app]\n")
-    run("git add exercices/exercice2_4/config.ini")
-    run("git commit -m 'init'")
+    # Commit 1: Initial implementation
+    with open("exercices/exercice2_4/user.py", "w") as f:
+        f.write("class User:\n")
+        f.write("    def __init__(self, name):\n")
+        f.write("        self.name = name\n")
+        f.write("\n")
+        f.write("    def greet(self):\n")
+        f.write("        return f'Hello, {self.name}'\n")
+    run("git add exercices/exercice2_4")
+    run("git commit -m 'Add User class'")
     
-    with open("exercices/exercice2_4/.gitignore", "w") as f:
-        f.write("*.log\n")
-    run("git add exercices/exercice2_4/.gitignore")
-    run("git commit -m 'gitignore'")
+    # Commit 2: Add validation (INCOMPLETE - missing age validation)
+    with open("exercices/exercice2_4/user.py", "w") as f:
+        f.write("class User:\n")
+        f.write("    def __init__(self, name, age):\n")
+        f.write("        self.name = name\n")
+        f.write("        self.age = age  # BUG: No validation\n")
+        f.write("\n")
+        f.write("    def greet(self):\n")
+        f.write("        return f'Hello, {self.name}'\n")
+        f.write("\n")
+        f.write("    def validate_name(self):\n")
+        f.write("        return len(self.name) > 0\n")
+    run("git add exercices/exercice2_4/user.py")
+    run("git commit -m 'Add age and validation'")
     
-    with open("exercices/exercice2_4/config.ini", "w") as f:
-        f.write("[app]\nname=myapp\n")
-    run("git add exercices/exercice2_4/config.ini")
-    run("git commit -m 'update config'")
+    # Commit 3: Add profile method (WRONG: contains age validation fix)
+    with open("exercices/exercice2_4/user.py", "w") as f:
+        f.write("class User:\n")
+        f.write("    def __init__(self, name, age):\n")
+        f.write("        self.name = name\n")
+        f.write("        if age < 0 or age > 150:  # FIX: This should be in commit 2!\n")
+        f.write("            raise ValueError('Invalid age')\n")
+        f.write("        self.age = age\n")
+        f.write("\n")
+        f.write("    def greet(self):\n")
+        f.write("        return f'Hello, {self.name}'\n")
+        f.write("\n")
+        f.write("    def validate_name(self):\n")
+        f.write("        return len(self.name) > 0\n")
+        f.write("\n")
+        f.write("    def get_profile(self):\n")
+        f.write("        return f'{self.name}, {self.age} years old'\n")
+    run("git add exercices/exercice2_4/user.py")
+    run("git commit -m 'Add profile method'")
     
-    with open("exercices/exercice2_4/requirements.txt", "w") as f:
-        f.write("requests\n")
-    run("git add exercices/exercice2_4/requirements.txt")
-    run("git commit -m 'add deps'")
-    
-    # Theme 2: Core Feature (messy)
-    with open("exercices/exercice2_4/main.py", "w") as f:
-        f.write("# TODO: implement\n")
-    run("git add exercices/exercice2_4/main.py")
-    run("git commit -m 'wip'")
-    
-    with open("exercices/exercice2_4/main.py", "w") as f:
-        f.write("def fetch():\n    pass\n")
-    run("git add exercices/exercice2_4/main.py")
-    run("git commit -m 'add fetch'")
-    
-    with open("exercices/exercice2_4/main.py", "w") as f:
-        f.write("import requests\ndef fetch():\n    return requests.get('api')\n")
-    run("git add exercices/exercice2_4/main.py")
-    run("git commit -m 'implement fetch'")
-    
-    with open("exercices/exercice2_4/main.py", "w") as f:
-        f.write("import requests\ndef fetch(url):\n    return requests.get(url)\n")
-    run("git add exercices/exercice2_4/main.py")
-    run("git commit -m 'fix'")
-    
-    with open("exercices/exercice2_4/processor.py", "w") as f:
-        f.write("def process(data):\n    return data.upper()\n")
-    run("git add exercices/exercice2_4/processor.py")
-    run("git commit -m 'process data'")
-    
-    # Theme 3: Tests (scattered)
-    with open("exercices/exercice2_4/test_main.py", "w") as f:
-        f.write("def test_fetch():\n    pass\n")
-    run("git add exercices/exercice2_4/test_main.py")
-    run("git commit -m 'test'")
-    
-    with open("exercices/exercice2_4/test_processor.py", "w") as f:
-        f.write("def test_process():\n    from processor import process\n    assert process('hi') == 'HI'\n")
-    run("git add exercices/exercice2_4/test_processor.py")
-    run("git commit -m 'more tests'")
-    
-    # Theme 4: Documentation (incomplete)
-    with open("exercices/exercice2_4/README.md", "w") as f:
-        f.write("# Project\n")
-    run("git add exercices/exercice2_4/README.md")
-    run("git commit -m 'readme'")
-    
-    with open("exercices/exercice2_4/README.md", "w") as f:
-        f.write("# Project\n\n## Usage\nRun main.py\n")
-    run("git add exercices/exercice2_4/README.md")
-    run("git commit -m 'update readme'")
-    
-    with open("exercices/exercice2_4/API.md", "w") as f:
-        f.write("# API Documentation\n\n## fetch(url)\nFetches data from URL\n")
-    run("git add exercices/exercice2_4/API.md")
-    run("git commit -m 'api docs'")
+    # Commit 4: Add tests
+    with open("exercices/exercice2_4/test_user.py", "w") as f:
+        f.write("from user import User\n")
+        f.write("import pytest\n")
+        f.write("\n")
+        f.write("def test_user_creation():\n")
+        f.write("    user = User('Alice', 30)\n")
+        f.write("    assert user.name == 'Alice'\n")
+        f.write("    assert user.age == 30\n")
+        f.write("\n")
+        f.write("def test_invalid_age():\n")
+        f.write("    with pytest.raises(ValueError):\n")
+        f.write("        User('Bob', -5)\n")
+        f.write("\n")
+        f.write("def test_profile():\n")
+        f.write("    user = User('Charlie', 25)\n")
+        f.write("    assert user.get_profile() == 'Charlie, 25 years old'\n")
+    run("git add exercices/exercice2_4/test_user.py")
+    run("git commit -m 'Add tests'")
     
     print("\n" + "="*60)
     print("✓ Exercice 2.4 initialized successfully!")
     print("="*60)
     print("\nBranch created:")
-    print("  - exercice2_4 (with 14 chaotic commits)")
+    print("  - exercice2_4 (with 4 commits)")
     
     print("\n" + "="*60)
-    print("EXERCICE 2.4 : RÉÉCRITURE COMPLÈTE D'UN HISTORIQUE SALE")
+    print("EXERCICE 2.4 : EXTRACTION D'UN FIX DU MAUVAIS COMMIT")
     print("="*60)
     print("\n📋 OBJECTIF:")
-    print("   Transformez 14 commits chaotiques en 4 commits propres et structurés")
+    print("   Déplacez la validation d'age du commit 3 vers le commit 2")
+    print("   où elle aurait dû être initialement")
     
     print("\n📝 CONTEXTE:")
-    print("   L'historique est un vrai chaos: messages peu clairs (wip, fix, etc.),")
-    print("   commits mal ordonnés, pas de structure. Vous devez le nettoyer")
-    print("   complètement et créer un historique professionnel.")
+    print("   Le commit 2 'Add age and validation' ajoute un champ 'age'")
+    print("   mais sans validation. Le commit 3 'Add profile method' ajoute")
+    print("   une méthode get_profile() ET la validation d'age.")
+    print("   La validation d'age devrait être dans le commit 2.")
     
-    print("\n💡 THÈMES À REGROUPER:")
-    print("   1. Setup (commits 1-4): Configuration initiale")
-    print("   2. Core Feature (commits 5-9): Fonctionnalité principale")
-    print("   3. Testing (commits 10-11): Tests")
-    print("   4. Documentation (commits 12-14): Documentation")
+    print("\n✅ RÉSULTAT ATTENDU:")
+    print("   Le fix de validation est maintenant dans le commit 2,")
+    print("   et le commit 3 contient seulement get_profile()")
     
-    print("\n✅ RÉSULTAT ATTENDU (4 commits):")
-    print("   * commit Documentation: Add complete project documentation")
-    print("   * commit Testing: Add comprehensive test suite")
-    print("   * commit Core feature: Implement complete feature")
-    print("   * commit Setup: Initial project configuration")
-    
-    print("\n💡 CONSEIL:")
-    print("   C'est un exercice difficile! Prenez votre temps pour analyser")
-    print("   chaque commit et déterminer à quel thème il appartient.")
-    print("   N'hésitez pas à utiliser 'git rebase --abort' si vous vous perdez.")
+    print("\n💡 ASTUCE AVANCÉE:")
+    print("   Utilisez 'git add -p' pour ajouter seulement certaines lignes")
+    print("   ou éditez manuellement le fichier entre deux commits")
     
     print("\n" + "="*60)
     print("Vous êtes maintenant sur la branche 'exercice2_4'")

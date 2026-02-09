@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Exercice 2.2: Nettoyage massif - squash + reword
-Ce script crée une branche avec de nombreux petits commits désorganisés à nettoyer.
+Exercice 2.2: Localisez et corrigez le commit fautif (avec conflit)
+Ce script crée une branche avec plusieurs commits, dont un introduit un bug.
+La correction du bug créera un conflit à résoudre.
 """
 
 import os
@@ -38,86 +39,136 @@ def main():
     # Create exercise directory
     os.makedirs("exercices/exercice2_2", exist_ok=True)
     
-    # Theme 1: Préparation (commits 1-3)
-    with open("exercices/exercice2_2/config.json", "w") as f:
-        f.write('{"version": "1.0"}\n')
-    run("git add exercices/exercice2_2/config.json")
-    run("git commit -m 'add config'")
+    # Commit 1: Initial implementation with add, subtract, multiply
+    with open("exercices/exercice2_2/calculator.py", "w") as f:
+        f.write("\"\"\"Simple calculator module\"\"\"\n")
+        f.write("\n")
+        f.write("def add(a, b):\n")
+        f.write("    return a + b\n")
+        f.write("\n")
+        f.write("def subtract(a, b):\n")
+        f.write("    return a - b\n")
+    run("git add exercices/exercice2_2")
+    run("git commit -m 'Initial calculator implementation'")
     
-    with open("exercices/exercice2_2/.gitignore", "w") as f:
-        f.write("*.pyc\n__pycache__/\n")
-    run("git add exercices/exercice2_2/.gitignore")
-    run("git commit -m 'gitignore'")
+    # Commit 2: Add multiply function
+    with open("exercices/exercice2_1/calculator.py", "w") as f:
+        f.write("\"\"\"Simple calculator module\"\"\"\n")
+        f.write("\n")
+        f.write("def add(a, b):\n")
+        f.write("    return a + b\n")
+        f.write("\n")
+        f.write("def subtract(a, b):\n")
+        f.write("    return a - b\n")
+        f.write("\n")
+        f.write("def multiply(a, b):\n")
+        f.write("    return a * b\n")
+    run("git add exercices/exercice2_1/calculator.py")
+    run("git commit -m 'Add multiply function'")
+
+    # Commit 3: Add divide function WITH BUG (uses * instead of /)
+    with open("exercices/exercice2_2/calculator.py", "w") as f:
+        f.write("\"\"\"Simple calculator module\"\"\"\n")
+        f.write("\n")
+        f.write("def add(a, b):\n")
+        f.write("    return a + b\n")
+        f.write("\n")
+        f.write("def subtract(a, b):\n")
+        f.write("    return a - b\n")
+        f.write("\n")
+        f.write("def multiply(a, b):\n")
+        f.write("    return a * b\n")
+        f.write("\n")
+        f.write("def divide(a, b):\n")
+        f.write("    if b == 0:\n")
+        f.write("        raise ValueError('Cannot divide by zero')\n")
+        f.write("    return a * b  # BUG: Should be a / b\n")
+    run("git add exercices/exercice2_2/calculator.py")
+    run("git commit -m 'Add divide function with zero check'")
     
-    with open("exercices/exercice2_2/requirements.txt", "w") as f:
-        f.write("pytest==7.0.0\n")
-    run("git add exercices/exercice2_2/requirements.txt")
-    run("git commit -m 'deps'")
+    # Commit 4: Add power function (this creates conflict when fixing divide)
+    with open("exercices/exercice2_2/calculator.py", "w") as f:
+        f.write("\"\"\"Simple calculator module\"\"\"\n")
+        f.write("\n")
+        f.write("def add(a, b):\n")
+        f.write("    return a + b\n")
+        f.write("\n")
+        f.write("def subtract(a, b):\n")
+        f.write("    return a - b\n")
+        f.write("\n")
+        f.write("def multiply(a, b):\n")
+        f.write("    return a * b\n")
+        f.write("\n")
+        f.write("def divide(a, b):\n")
+        f.write("    if b == 0:\n")
+        f.write("        raise ValueError('Cannot divide by zero')\n")
+        f.write("    return a * b  # BUG: Should be a / b\n")
+        f.write("\n")
+        f.write("def power(a, b):\n")
+        f.write("    return a ** b\n")
+    run("git add exercices/exercice2_2/calculator.py")
+    run("git commit -m 'Add power function'")
     
-    # Theme 2: Feature (commits 4-7)
-    with open("exercices/exercice2_2/auth.py", "w") as f:
-        f.write("def login():\n    pass\n")
-    run("git add exercices/exercice2_2/auth.py")
-    run("git commit -m 'start auth'")
-    
-    with open("exercices/exercice2_2/auth.py", "w") as f:
-        f.write("def login(user, pwd):\n    return True\n")
-    run("git add exercices/exercice2_2/auth.py")
-    run("git commit -m 'wip'")
-    
-    with open("exercices/exercice2_2/auth.py", "w") as f:
-        f.write("def login(user, pwd):\n    return user == 'admin'\n\ndef logout():\n    pass\n")
-    run("git add exercices/exercice2_2/auth.py")
-    run("git commit -m 'logout'")
-    
-    with open("exercices/exercice2_2/auth.py", "w") as f:
-        f.write("def login(user, pwd):\n    return user == 'admin' and pwd == 'secret'\n\ndef logout():\n    return True\n")
-    run("git add exercices/exercice2_2/auth.py")
-    run("git commit -m 'fix login and logout'")
-    
-    # Theme 3: Refactor (commits 8-10)
-    with open("exercices/exercice2_2/auth.py", "w") as f:
-        f.write("\"\"\"Authentication module\"\"\"\n\ndef login(user, pwd):\n    return user == 'admin' and pwd == 'secret'\n\ndef logout():\n    return True\n")
-    run("git add exercices/exercice2_2/auth.py")
-    run("git commit -m 'add docstring'")
-    
-    with open("exercices/exercice2_2/auth.py", "w") as f:
-        f.write("\"\"\"Authentication module\"\"\"\n\ndef validate_credentials(username, password):\n    return username == 'admin' and password == 'secret'\n\ndef logout():\n    return True\n")
-    run("git add exercices/exercice2_2/auth.py")
-    run("git commit -m 'rename function'")
-    
-    with open("exercices/exercice2_2/auth.py", "w") as f:
-        f.write("\"\"\"Authentication module\"\"\"\n\nADMIN_USER = 'admin'\nADMIN_PASS = 'secret'\n\ndef validate_credentials(username, password):\n    return username == ADMIN_USER and password == ADMIN_PASS\n\ndef logout():\n    return True\n")
-    run("git add exercices/exercice2_2/auth.py")
-    run("git commit -m 'extract constants'")
+    # Commit 5: Add tests
+    with open("exercices/exercice2_2/test_calculator.py", "w") as f:
+        f.write("\"\"\"Tests for calculator module\"\"\"\n")
+        f.write("from calculator import add, subtract, multiply, divide, power\n")
+        f.write("\n")
+        f.write("def test_add():\n")
+        f.write("    assert add(2, 3) == 5\n")
+        f.write("    assert add(-1, 1) == 0\n")
+        f.write("    assert add(0, 0) == 0\n")
+        f.write("\n")
+        f.write("def test_subtract():\n")
+        f.write("    assert subtract(5, 3) == 2\n")
+        f.write("    assert subtract(10, 7) == 3\n")
+        f.write("    assert subtract(1, 1) == 0\n")
+        f.write("\n")
+        f.write("def test_multiply():\n")
+        f.write("    assert multiply(2, 3) == 6\n")
+        f.write("    assert multiply(4, 5) == 20\n")
+        f.write("    assert multiply(0, 10) == 0\n")
+        f.write("\n")
+        f.write("def test_divide():\n")
+        f.write("    assert divide(6, 2) == 3\n")
+        f.write("    assert divide(10, 5) == 2\n")
+        f.write("    assert divide(15, 3) == 5\n")
+        f.write("\n")
+        f.write("def test_power():\n")
+        f.write("    assert power(2, 3) == 8\n")
+        f.write("    assert power(5, 2) == 25\n")
+        f.write("    assert power(10, 0) == 1\n")
+    run("git add exercices/exercice2_2/test_calculator.py")
+    run("git commit -m 'Add comprehensive tests'")
     
     print("\n" + "="*60)
     print("✓ Exercice 2.2 initialized successfully!")
     print("="*60)
     print("\nBranch created:")
-    print("  - exercice2_2 (with 10 messy commits)")
+    print("  - exercice2_2 (with 4 commits, one contains a bug)")
     
     print("\n" + "="*60)
-    print("EXERCICE 2.2 : NETTOYAGE MASSIF (SQUASH + REWORD)")
+    print("EXERCICE 2.2 : LOCALISER ET CORRIGER UN BUG AVEC CONFLIT")
     print("="*60)
     print("\n📋 OBJECTIF:")
-    print("   Regroupez 10 commits désorganisés en 3 commits thématiques propres")
+    print("   1. Exécutez les tests et constatez qu'ils échouent")
+    print("   2. Identifiez quel commit a introduit le bug")
+    print("   3. Corrigez le bug DANS le commit qui l'a introduit")
+    print("   4. Résolvez le conflit qui apparaît lors du rebase")
     
     print("\n📝 CONTEXTE:")
-    print("   L'historique contient beaucoup de petits commits (wip, fix, etc.)")
-    print("   qui doivent être regroupés par thème:")
-    print("   - Commits 1-3: Configuration et setup")
-    print("   - Commits 4-7: Implémentation de l'authentification")
-    print("   - Commits 8-10: Refactoring et optimisation")
+    print("   Une suite de tests pytest est fournie. Un commit introduit un bug")
+    print("   dans la fonction divide(). Un commit ultérieur ajoute une fonction")
+    print("   power() juste après, ce qui crée un conflit lors de la correction.")
     
-    print("\n✅ RÉSULTAT ATTENDU (3 commits avec messages clairs):")
-    print("   * commit Refactor: Clean and optimize code")
-    print("   * commit Feature: Implement user authentication")
-    print("   * commit Preparation: Initial setup and configuration")
+    print("\n💡 COMMANDE POUR EXÉCUTER LES TESTS:")
+    print("   cd exercices/exercice2_1")
+    print("   pytest .")
+    print("   ")
     
-    print("\n💡 CONSEIL:")
-    print("   Dans l'éditeur de rebase, vous pouvez réorganiser les lignes")
-    print("   pour grouper les commits apparentés ensemble")
+    print("\n✅ RÉSULTAT ATTENDU:")
+    print("   Tous les tests passent, le bug est corrigé dans l'historique,")
+    print("   et le conflit a été résolu correctement")
     
     print("\n" + "="*60)
     print("Vous êtes maintenant sur la branche 'exercice2_2'")

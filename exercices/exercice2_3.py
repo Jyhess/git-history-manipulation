@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Exercice 2.3: Extraction d'un fix dans le mauvais commit
-Ce script crée une situation où un fix a été inclus dans le mauvais commit.
+Exercice 2.3: Nettoyage massif - squash + reword
+Ce script crée une branche avec de nombreux petits commits désorganisés à nettoyer.
 """
 
 import os
@@ -38,98 +38,86 @@ def main():
     # Create exercise directory
     os.makedirs("exercices/exercice2_3", exist_ok=True)
     
-    # Commit 1: Initial implementation
-    with open("exercices/exercice2_3/user.py", "w") as f:
-        f.write("class User:\n")
-        f.write("    def __init__(self, name):\n")
-        f.write("        self.name = name\n")
-        f.write("\n")
-        f.write("    def greet(self):\n")
-        f.write("        return f'Hello, {self.name}'\n")
-    run("git add exercices/exercice2_3")
-    run("git commit -m 'Add User class'")
+    # Theme 1: Préparation (commits 1-3)
+    with open("exercices/exercice2_3/config.json", "w") as f:
+        f.write('{"version": "1.0"}\n')
+    run("git add exercices/exercice2_3/config.json")
+    run("git commit -m 'add config'")
     
-    # Commit 2: Add validation (INCOMPLETE - missing age validation)
-    with open("exercices/exercice2_3/user.py", "w") as f:
-        f.write("class User:\n")
-        f.write("    def __init__(self, name, age):\n")
-        f.write("        self.name = name\n")
-        f.write("        self.age = age  # BUG: No validation\n")
-        f.write("\n")
-        f.write("    def greet(self):\n")
-        f.write("        return f'Hello, {self.name}'\n")
-        f.write("\n")
-        f.write("    def validate_name(self):\n")
-        f.write("        return len(self.name) > 0\n")
-    run("git add exercices/exercice2_3/user.py")
-    run("git commit -m 'Add age and validation'")
+    with open("exercices/exercice2_3/.gitignore", "w") as f:
+        f.write("*.pyc\n__pycache__/\n")
+    run("git add exercices/exercice2_3/.gitignore")
+    run("git commit -m 'gitignore'")
     
-    # Commit 3: Add profile method (WRONG: contains age validation fix)
-    with open("exercices/exercice2_3/user.py", "w") as f:
-        f.write("class User:\n")
-        f.write("    def __init__(self, name, age):\n")
-        f.write("        self.name = name\n")
-        f.write("        if age < 0 or age > 150:  # FIX: This should be in commit 2!\n")
-        f.write("            raise ValueError('Invalid age')\n")
-        f.write("        self.age = age\n")
-        f.write("\n")
-        f.write("    def greet(self):\n")
-        f.write("        return f'Hello, {self.name}'\n")
-        f.write("\n")
-        f.write("    def validate_name(self):\n")
-        f.write("        return len(self.name) > 0\n")
-        f.write("\n")
-        f.write("    def get_profile(self):\n")
-        f.write("        return f'{self.name}, {self.age} years old'\n")
-    run("git add exercices/exercice2_3/user.py")
-    run("git commit -m 'Add profile method'")
+    with open("exercices/exercice2_3/requirements.txt", "w") as f:
+        f.write("pytest==7.0.0\n")
+    run("git add exercices/exercice2_3/requirements.txt")
+    run("git commit -m 'deps'")
     
-    # Commit 4: Add tests
-    with open("exercices/exercice2_3/test_user.py", "w") as f:
-        f.write("from user import User\n")
-        f.write("import pytest\n")
-        f.write("\n")
-        f.write("def test_user_creation():\n")
-        f.write("    user = User('Alice', 30)\n")
-        f.write("    assert user.name == 'Alice'\n")
-        f.write("    assert user.age == 30\n")
-        f.write("\n")
-        f.write("def test_invalid_age():\n")
-        f.write("    with pytest.raises(ValueError):\n")
-        f.write("        User('Bob', -5)\n")
-        f.write("\n")
-        f.write("def test_profile():\n")
-        f.write("    user = User('Charlie', 25)\n")
-        f.write("    assert user.get_profile() == 'Charlie, 25 years old'\n")
-    run("git add exercices/exercice2_3/test_user.py")
-    run("git commit -m 'Add tests'")
+    # Theme 2: Feature (commits 4-7)
+    with open("exercices/exercice2_3/auth.py", "w") as f:
+        f.write("def login():\n    pass\n")
+    run("git add exercices/exercice2_3/auth.py")
+    run("git commit -m 'start auth'")
+    
+    with open("exercices/exercice2_3/auth.py", "w") as f:
+        f.write("def login(user, pwd):\n    return True\n")
+    run("git add exercices/exercice2_3/auth.py")
+    run("git commit -m 'wip'")
+    
+    with open("exercices/exercice2_3/auth.py", "w") as f:
+        f.write("def login(user, pwd):\n    return user == 'admin'\n\ndef logout():\n    pass\n")
+    run("git add exercices/exercice2_3/auth.py")
+    run("git commit -m 'logout'")
+    
+    with open("exercices/exercice2_3/auth.py", "w") as f:
+        f.write("def login(user, pwd):\n    return user == 'admin' and pwd == 'secret'\n\ndef logout():\n    return True\n")
+    run("git add exercices/exercice2_3/auth.py")
+    run("git commit -m 'fix login and logout'")
+    
+    # Theme 3: Refactor (commits 8-10)
+    with open("exercices/exercice2_3/auth.py", "w") as f:
+        f.write("\"\"\"Authentication module\"\"\"\n\ndef login(user, pwd):\n    return user == 'admin' and pwd == 'secret'\n\ndef logout():\n    return True\n")
+    run("git add exercices/exercice2_3/auth.py")
+    run("git commit -m 'add docstring'")
+    
+    with open("exercices/exercice2_3/auth.py", "w") as f:
+        f.write("\"\"\"Authentication module\"\"\"\n\ndef validate_credentials(username, password):\n    return username == 'admin' and password == 'secret'\n\ndef logout():\n    return True\n")
+    run("git add exercices/exercice2_3/auth.py")
+    run("git commit -m 'rename function'")
+    
+    with open("exercices/exercice2_3/auth.py", "w") as f:
+        f.write("\"\"\"Authentication module\"\"\"\n\nADMIN_USER = 'admin'\nADMIN_PASS = 'secret'\n\ndef validate_credentials(username, password):\n    return username == ADMIN_USER and password == ADMIN_PASS\n\ndef logout():\n    return True\n")
+    run("git add exercices/exercice2_3/auth.py")
+    run("git commit -m 'extract constants'")
     
     print("\n" + "="*60)
     print("✓ Exercice 2.3 initialized successfully!")
     print("="*60)
     print("\nBranch created:")
-    print("  - exercice2_3 (with 4 commits)")
+    print("  - exercice2_3 (with 10 messy commits)")
     
     print("\n" + "="*60)
-    print("EXERCICE 2.3 : EXTRACTION D'UN FIX DU MAUVAIS COMMIT")
+    print("EXERCICE 2.3 : NETTOYAGE MASSIF (SQUASH + REWORD)")
     print("="*60)
     print("\n📋 OBJECTIF:")
-    print("   Déplacez la validation d'age du commit 3 vers le commit 2")
-    print("   où elle aurait dû être initialement")
+    print("   Regroupez 10 commits désorganisés en 3 commits thématiques propres")
     
     print("\n📝 CONTEXTE:")
-    print("   Le commit 2 'Add age and validation' ajoute un champ 'age'")
-    print("   mais sans validation. Le commit 3 'Add profile method' ajoute")
-    print("   une méthode get_profile() ET la validation d'age.")
-    print("   La validation d'age devrait être dans le commit 2.")
+    print("   L'historique contient beaucoup de petits commits (wip, fix, etc.)")
+    print("   qui doivent être regroupés par thème:")
+    print("   - Commits 1-3: Configuration et setup")
+    print("   - Commits 4-7: Implémentation de l'authentification")
+    print("   - Commits 8-10: Refactoring et optimisation")
     
-    print("\n✅ RÉSULTAT ATTENDU:")
-    print("   Le fix de validation est maintenant dans le commit 2,")
-    print("   et le commit 3 contient seulement get_profile()")
+    print("\n✅ RÉSULTAT ATTENDU (3 commits avec messages clairs):")
+    print("   * commit Refactor: Clean and optimize code")
+    print("   * commit Feature: Implement user authentication")
+    print("   * commit Preparation: Initial setup and configuration")
     
-    print("\n💡 ASTUCE AVANCÉE:")
-    print("   Utilisez 'git add -p' pour ajouter seulement certaines lignes")
-    print("   ou éditez manuellement le fichier entre deux commits")
+    print("\n💡 CONSEIL:")
+    print("   Dans l'éditeur de rebase, vous pouvez réorganiser les lignes")
+    print("   pour grouper les commits apparentés ensemble")
     
     print("\n" + "="*60)
     print("Vous êtes maintenant sur la branche 'exercice2_3'")

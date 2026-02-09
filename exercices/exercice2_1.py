@@ -51,7 +51,7 @@ def main():
     run("git add exercices/exercice2_1")
     run("git commit -m 'Initial calculator implementation'")
     
-    # Commit 2: Add multiply function
+    # Commit 2: Add multiply function and introduce typo in subtract function
     with open("exercices/exercice2_1/calculator.py", "w") as f:
         f.write("\"\"\"Simple calculator module\"\"\"\n")
         f.write("\n")
@@ -59,14 +59,14 @@ def main():
         f.write("    return a + b\n")
         f.write("\n")
         f.write("def subtract(a, b):\n")
-        f.write("    return a - b\n")
+        f.write("    return a - b + 1  # Mistake here\n")
         f.write("\n")
         f.write("def multiply(a, b):\n")
         f.write("    return a * b\n")
     run("git add exercices/exercice2_1/calculator.py")
     run("git commit -m 'Add multiply function'")
     
-    # Commit 3: Add divide function (WITH BUG)
+    # Commit 3: Add divide function
     with open("exercices/exercice2_1/calculator.py", "w") as f:
         f.write("\"\"\"Simple calculator module\"\"\"\n")
         f.write("\n")
@@ -74,7 +74,7 @@ def main():
         f.write("    return a + b\n")
         f.write("\n")
         f.write("def subtract(a, b):\n")
-        f.write("    return a - b\n")
+        f.write("    return a - b + 1  # Mistake here\n")
         f.write("\n")
         f.write("def multiply(a, b):\n")
         f.write("    return a * b\n")
@@ -92,13 +92,13 @@ def main():
         f.write("    return a + b\n")
         f.write("\n")
         f.write("def subtract(a, b):\n")
-        f.write("    return a - b\n")
+        f.write("    return a - b + 1  # Mistake here\n")
         f.write("\n")
         f.write("def multiply(a, b):\n")
         f.write("    return a * b\n")
         f.write("\n")
         f.write("def divide(a, b):\n")
-        f.write("    return a * b  # BUG persists\n")
+        f.write("    return a / b\n")
         f.write("\n")
         f.write("def power(a, b):\n")
         f.write("    return a ** b\n")
@@ -152,18 +152,13 @@ def main():
     print("   Vous devez trouver ce commit et corriger le bug directement")
     print("   dans ce commit (pas dans un nouveau commit).")
     
-    print("\n💡 COMMANDES À EXÉCUTER:")
-    print("   Pour executer les tests:")
+    print("\n💡 COMMANDE POUR EXÉCUTER LES TESTS:")
     print("   cd exercices/exercice2_1")
-    print("   pytest")
+    print("   pytest .")
     print("   ")
     
     print("\n✅ RÉSULTAT ATTENDU:")
     print("   Tous les tests passent et le bug est corrigé dans l'historique")
-    
-    print("\n💡 ASTUCE:")
-    print("   Utilisez 'git log -p' pour voir les modifications de chaque commit")
-    print("   Le bug est dans la fonction divide() qui utilise * au lieu de /")
     
     print("\n" + "="*60)
     print("Vous êtes maintenant sur la branche 'exercice2_1'")

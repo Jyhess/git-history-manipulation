@@ -122,31 +122,56 @@ La branche `exercice1_6` sera créée avec des commits, puis elle sera supprimé
 
 ---
 
-## Série 2 — Challenges progressifs (4 exercices)
+## Série 2 — Challenges progressifs (5 exercices)
 
-### Exercice 1 : Localisez et corrigez le commit fautif
+### Exercice 1 : Localisez et corrigez un bug simple
 
 Lancez `python exercice2_1.py` pour initialiser l'exercice.
 
 **Contexte** : En exécutant `pytest exercices/exercice2_1`, des tests échouent.
 
 **Objectif** : 
-1. Localisez le commit ayant introduit l'erreur (utilisez `git bisect` si nécessaire)
+1. Localisez le commit ayant introduit l'erreur
 2. Corrigez le bug dans *le commit qui l'a introduit* (rebase + edit)
 
 **Pour exécuter les tests** :
 ```bash
-cd exercices/exercice2_1  # Vérifier que les tests échouent
-pytest .
+cd exercices/exercice2_1
+pytest .  # Vérifier que les tests échouent
 ```
+
+**Difficulté** : ⭐ Facile - Le bug est une simple typo dans la fonction `subtract()` et peut être corrigé sans conflit.
 
 **Résultat attendu** : Tous les tests passent et l'historique est propre.
 
 ---
 
-### Exercice 2 : Nettoyage massif : squash + reword
+### Exercice 2 : Localisez et corrigez un bug avec conflit
 
 Lancez `python exercice2_2.py` pour initialiser l'exercice.
+
+**Contexte** : En exécutant `pytest exercices/exercice2_2`, des tests échouent.
+
+**Objectif** : 
+1. Localisez le commit ayant introduit l'erreur
+2. Corrigez le bug dans *le commit qui l'a introduit* (rebase + edit)
+3. Résolvez le conflit qui apparaît lors du rebase
+
+**Pour exécuter les tests** :
+```bash
+cd exercices/exercice2_2
+pytest .
+```
+
+**Difficulté** : ⭐⭐ Moyen - Le bug est dans la fonction `divide()` et un commit ultérieur ajoute une fonction `power()` juste après, créant un conflit lors de la correction.
+
+**Résultat attendu** : Tous les tests passent, l'historique est propre, et le conflit a été résolu correctement.
+
+---
+
+### Exercice 3 : Nettoyage massif : squash + reword
+
+Lancez `python exercice2_3.py` pour initialiser l'exercice.
 
 **Contexte** : L'historique contient beaucoup de petits commits désorganisés.
 
@@ -164,9 +189,9 @@ Lancez `python exercice2_2.py` pour initialiser l'exercice.
 
 ---
 
-### Exercice 3 : Extraction d'un fix dans le mauvais commit
+### Exercice 4 : Extraction d'un fix dans le mauvais commit
 
-Lancez `python exercice2_3.py` pour initialiser l'exercice.
+Lancez `python exercice2_4.py` pour initialiser l'exercice.
 
 **Contexte** : Un fix important a été inclus dans le mauvais commit.
 
@@ -176,9 +201,9 @@ Lancez `python exercice2_3.py` pour initialiser l'exercice.
 
 ---
 
-### Exercice 4 : Réécriture complète d'un historique sale
+### Exercice 5 : Réécriture complète d'un historique sale
 
-Lancez `python exercice2_4.py` pour initialiser l'exercice.
+Lancez `python exercice2_5.py` pour initialiser l'exercice.
 
 **Contexte** : Un historique chaotique avec plus de 12 commits mal organisés, des messages peu clairs, des commits de debug, etc.
 

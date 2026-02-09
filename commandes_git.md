@@ -27,6 +27,3 @@ Voici une liste des commandes Git utiles pour les exercices :
 ### Commandes pour le reflog
 - `git reflog` : Voir l'historique des opérations Git.
 - `git reset --hard HEAD@{N}` : Revenir à un état antérieur visible dans le reflog.
-
-### Ajoutées récemment
-- `git rebase/rebase/reset main` : Commandes pour manipuler la branche principale.
