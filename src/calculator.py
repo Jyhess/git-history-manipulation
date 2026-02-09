@@ -1,7 +1,5 @@
 """A simple calculator module for demonstration purposes."""
 
-from functools import wraps
-
 
 def binary_operation_doc(operation, result_desc, arg_a="First number", arg_b="Second number", raises=None):
     """Decorator to add standardized docstrings to binary operations."""
