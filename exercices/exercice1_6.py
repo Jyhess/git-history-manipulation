@@ -97,14 +97,6 @@ def main():
     print("   Elle vient d'être supprimée par erreur avec 'git branch -D'.")
     print("   Le reflog garde une trace de toutes les opérations Git.")
     
-    print("\n💡 COMMANDES À EXÉCUTER:")
-    print("   git reflog                  # Voir l'historique des opérations")
-    print("   # Cherchez 'Important feature completed' dans le reflog")
-    print(f"   git checkout -b exercice1_6 {last_commit[:8]}")
-    print("   # OU utilisez le HEAD@{{N}} trouvé dans le reflog:")
-    print("   # git checkout -b exercice1_6 HEAD@{N}")
-    print("   git log --oneline           # Vérifier que la branche est récupérée")
-    
     print("\n✅ RÉSULTAT ATTENDU (3 commits):")
     print("   * commit Important feature completed")
     print("   * commit Work in progress")

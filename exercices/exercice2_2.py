@@ -110,15 +110,6 @@ def main():
     print("   - Commits 4-7: Implémentation de l'authentification")
     print("   - Commits 8-10: Refactoring et optimisation")
     
-    print("\n💡 COMMANDES À EXÉCUTER:")
-    print("   git log --oneline           # Observer le désordre")
-    print("   git rebase -i HEAD~10       # Rebase interactif")
-    print("   # Regroupez et squashez les commits par thème:")
-    print("   # - Gardez le 1er commit de chaque groupe avec 'pick'")
-    print("   # - Utilisez 'squash' (ou 's') pour les autres du même groupe")
-    print("   # - Utilisez 'reword' (ou 'r') pour améliorer les messages")
-    print("   git log --oneline           # Vérifier (3 commits)")
-    
     print("\n✅ RÉSULTAT ATTENDU (3 commits avec messages clairs):")
     print("   * commit Refactor: Clean and optimize code")
     print("   * commit Feature: Implement user authentication")

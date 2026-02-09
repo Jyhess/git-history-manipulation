@@ -5,38 +5,7 @@ Chaque exercice est accompagné d'un script Python qui initialise l'environnemen
 
 ## Commandes Git de base nécessaires
 
-Avant de commencer les exercices, assurez-vous de maîtriser ces commandes de base :
-
-### Navigation et inspection
-
-- `git branch` : Lister toutes les branches locales
-- `git branch -a` : Lister toutes les branches (locales et distantes)
-- `git checkout <branche>` : Changer de branche
-- `git checkout -b <nouvelle-branche>` : Créer et changer vers une nouvelle branche
-- `git log` : Afficher l'historique des commits
-- `git log --oneline` : Afficher l'historique en format compact
-- `git log --oneline --graph --all` : Visualiser l'historique avec un graphe
-- `git show <commit>` : Afficher les détails d'un commit spécifique
-- `git diff` : Voir les modifications non commitées
-- `git status` : Voir l'état du répertoire de travail
-
-### Manipulation d'historique
-
-- `git rebase <branche>` : Rebaser la branche courante sur une autre branche
-- `git rebase -i HEAD~N` : Rebase interactif sur les N derniers commits
-- `git rebase --continue` : Continuer un rebase après avoir résolu un conflit
-- `git rebase --abort` : Annuler un rebase en cours
-- `git commit --amend` : Modifier le dernier commit
-- `git reset HEAD~N` : Revenir N commits en arrière (en gardant les modifications)
-- `git reset --hard HEAD~N` : Revenir N commits en arrière (en perdant les modifications)
-- `git reflog` : Voir l'historique de toutes les opérations Git
-- `git cherry-pick <commit>` : Appliquer un commit spécifique
-
-### Commandes utiles pour les exercices
-
-- `git branch -D <branche>` : Supprimer une branche de force
-- `git log --oneline -N` : Afficher les N derniers commits en format compact
-- `git log --all --oneline --graph --decorate` : Vue complète de l'historique
+Les commandes Git nécessaires pour les exercices ont été déplacées dans un fichier séparé. Vous pouvez les consulter ici : [Commandes Git de base](../commandes_git.md)
 
 ---
 
@@ -302,36 +271,6 @@ git rebase -i HEAD~13
 * commit Testing: Add comprehensive test suite
 * commit Core feature: Implement complete feature
 * commit Setup: Initial project configuration
-```
-
----
-
-## Conseils généraux
-
-### Commandes utiles
-
-- `git log --oneline --graph --all` : Visualiser l'historique
-- `git rebase -i HEAD~N` : Rebase interactif sur les N derniers commits
-- `git reflog` : Voir l'historique de toutes les opérations Git
-- `git reset --hard HEAD@{N}` : Revenir à un état antérieur (visible dans reflog)
-- `git cherry-pick <commit>` : Appliquer un commit spécifique
-
-### Actions possibles en rebase interactif
-
-- `pick` : Garder le commit tel quel
-- `reword` : Modifier le message du commit
-- `edit` : Modifier le contenu du commit
-- `squash` : Fusionner avec le commit précédent (garder les messages)
-- `fixup` : Fusionner avec le commit précédent (garder seulement le message du commit précédent)
-- `drop` : Supprimer le commit
-
-### Annuler une opération qui a mal tourné
-
-Si vous vous trompez pendant un rebase :
-```bash
-git rebase --abort  # Annuler le rebase en cours
-git reflog  # Trouver l'état avant le rebase
-git reset --hard HEAD@{N}  # Revenir à cet état
 ```
 
 ---

@@ -90,14 +90,6 @@ def main():
     print("   Un fichier temporaire a été commité par erreur.")
     print("   Ce commit doit être complètement supprimé de l'historique.")
     
-    print("\n💡 COMMANDES À EXÉCUTER:")
-    print("   git log --oneline           # Voir les 4 commits")
-    print("   git rebase -i HEAD~4        # Rebase interactif")
-    print("   # Supprimez la ligne du 2ème commit (WIP: Add temporary debug file)")
-    print("   # OU remplacez 'pick' par 'drop' (ou 'd')")
-    print("   # Sauvegardez et fermez l'éditeur")
-    print("   git log --oneline           # Vérifier le résultat (3 commits)")
-    
     print("\n✅ RÉSULTAT ATTENDU (3 commits):")
     print("   * commit Add final feature")
     print("   * commit Add core functionality")

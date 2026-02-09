@@ -147,7 +147,7 @@ deactivate
 
 Une fois votre environnement configuré, consultez le guide complet de manipulation Git :
 
-👉 **[LESSON.md](LESSON.md)** - Guide complet sur la manipulation de l'historique Git
+👉 **[lesson.md](lesson.md)** - Guide complet sur la manipulation de l'historique Git
 
 Le guide couvre :
 - Les trois zones de Git

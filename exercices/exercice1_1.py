@@ -90,12 +90,7 @@ def main():
     print("   Deux branches ont divergé depuis un point commun.")
     print("   La branche 'exercice1_1_main' a avancé avec 2 nouveaux commits.")
     print("   La branche 'exercice1_1_feature' a 1 commit de fonctionnalité.")
-    
-    print("\n💡 COMMANDES À EXÉCUTER:")
-    print("   git log --oneline --graph --all  # Visualiser l'état actuel")
-    print("   git rebase exercice1_1_main      # Rebaser sur main")
-    print("   git log --oneline --graph --all  # Vérifier le résultat")
-    
+       
     print("\n✅ RÉSULTAT ATTENDU:")
     print("   * commit (exercice1_1_feature) Add feature implementation")
     print("   * commit Fix bug in main")

@@ -90,18 +90,7 @@ def main():
     print("   2. Add documentation")
     print("   3. Add main feature")
     print("   4. Add tests")
-    
-    print("\n💡 COMMANDES À EXÉCUTER:")
-    print("   git log --oneline           # Voir l'ordre actuel")
-    print("   git rebase -i HEAD~4        # Rebase interactif")
-    print("   # Réorganisez les lignes dans l'ordre souhaité:")
-    print("   #   pick ... Initial setup")
-    print("   #   pick ... Add tests")
-    print("   #   pick ... Add main feature")
-    print("   #   pick ... Add documentation")
-    print("   # Sauvegardez et fermez l'éditeur")
-    print("   git log --oneline           # Vérifier le nouvel ordre")
-    
+
     print("\n✅ RÉSULTAT ATTENDU:")
     print("   * commit Add documentation")
     print("   * commit Add main feature")

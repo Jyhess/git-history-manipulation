@@ -104,14 +104,6 @@ def main():
     print("   - 'fix: feature typo' doit être fusionné avec 'Add feature'")
     print("   - 'fix: tests syntax' doit être fusionné avec 'Add tests'")
     
-    print("\n💡 COMMANDES À EXÉCUTER:")
-    print("   git log --oneline           # Voir les 6 commits")
-    print("   git rebase -i HEAD~6        # Rebase interactif")
-    print("   # Déplacez les lignes 'fix:' juste après leur commit parent")
-    print("   # Remplacez 'pick' par 'fixup' (ou 'f') pour les commits fix:")
-    print("   # Sauvegardez et fermez l'éditeur")
-    print("   git log --oneline           # Vérifier le résultat (4 commits)")
-    
     print("\n✅ RÉSULTAT ATTENDU (4 commits):")
     print("   * commit Add documentation")
     print("   * commit Add tests (incluant fix: tests syntax)")

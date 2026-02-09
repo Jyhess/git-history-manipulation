@@ -135,16 +135,6 @@ def main():
     print("   3. Testing (commits 10-11): Tests")
     print("   4. Documentation (commits 12-14): Documentation")
     
-    print("\n💡 COMMANDES À EXÉCUTER:")
-    print("   git log --oneline           # Observer le chaos!")
-    print("   git rebase -i HEAD~14       # Rebase interactif")
-    print("   # Dans l'éditeur:")
-    print("   # 1. Réorganisez les commits par thème")
-    print("   # 2. Gardez le premier de chaque groupe avec 'pick'")
-    print("   # 3. Utilisez 'squash' pour les autres du même groupe")
-    print("   # 4. Utilisez 'reword' pour donner des messages clairs")
-    print("   git log --oneline           # Admirer le résultat (4 commits)")
-    
     print("\n✅ RÉSULTAT ATTENDU (4 commits):")
     print("   * commit Documentation: Add complete project documentation")
     print("   * commit Testing: Add comprehensive test suite")
